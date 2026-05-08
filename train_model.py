@@ -1,6 +1,4 @@
-# =========================
-# Landmark Detection - Improved Version
-# =========================
+# Landmark Detection 
 
 import os
 import numpy as np
@@ -14,18 +12,14 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-# =========================
 # CONFIG
-# =========================
 
 IMG_SIZE = (160, 160)
 BATCH_SIZE = 16
 EPOCHS = 25
 DATASET_PATH = "dataset"
 
-# =========================
 # DATA GENERATORS
-# =========================
 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
@@ -57,9 +51,7 @@ val_generator = val_datagen.flow_from_directory(
 num_classes = train_generator.num_classes
 class_labels = {v: k for k, v in train_generator.class_indices.items()}
 
-# =========================
 # MODEL - TRANSFER LEARNING
-# =========================
 
 base_model = MobileNetV2(
     weights='imagenet',
@@ -86,18 +78,14 @@ model.compile(
 
 model.summary()
 
-# =========================
 # CALLBACKS
-# =========================
 
 callbacks = [
     EarlyStopping(patience=5, restore_best_weights=True),
     ReduceLROnPlateau(factor=0.3, patience=3)
 ]
 
-# =========================
 # TRAINING (PHASE 1)
-# =========================
 
 history = model.fit(
     train_generator,
@@ -106,9 +94,7 @@ history = model.fit(
     callbacks=callbacks
 )
 
-# =========================
 # FINE-TUNING (PHASE 2)
-# =========================
 
 print("\nStarting Fine-Tuning...")
 
@@ -131,16 +117,12 @@ history_fine = model.fit(
     callbacks=callbacks
 )
 
-# =========================
 # EVALUATION
-# =========================
 
 loss, acc = model.evaluate(val_generator)
 print(f"\nFinal Accuracy: {acc * 100:.2f}%")
 
-# =========================
 # PREDICTION FUNCTION
-# =========================
 
 def predict_image(img_path):
     img = tf.keras.preprocessing.image.load_img(img_path, target_size=IMG_SIZE)
@@ -167,16 +149,10 @@ def predict_image(img_path):
     plt.axis('off')
     plt.show()
 
-# =========================
 # TEST PREDICTION
-# =========================
 
-# Example:
 predict_image("test.jpg")
 
-# =========================
 # SAVE MODEL
-# =========================
-
 model.save("improved_landmark_model.keras")
 print("\nModel saved successfully!")

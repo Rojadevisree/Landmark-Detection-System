@@ -2,9 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-# ====================================
 # LOAD SAVED MODEL
-# ====================================
 
 model = tf.keras.models.load_model(
     "improved_landmark_model.keras"
@@ -12,9 +10,7 @@ model = tf.keras.models.load_model(
 
 print("Model loaded successfully!")
 
-# ====================================
 # SETTINGS
-# ====================================
 
 IMG_SIZE = (160, 160)
 
@@ -30,9 +26,7 @@ class_labels = {
     6: 'taj_mahal'
 }
 
-# ====================================
 # PREDICTION FUNCTION
-# ====================================
 
 def predict_image(img_path):
 
@@ -70,8 +64,6 @@ def predict_image(img_path):
     plt.axis('off')
     plt.show()
 
-# ====================================
 # TEST IMAGE
-# ====================================
 
 predict_image("test.jpg")
