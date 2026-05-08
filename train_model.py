@@ -141,9 +141,9 @@ def predict_image(img_path):
     confidence = np.max(pred)
 
     if confidence < 0.6:
-        print("\n⚠️ Low confidence → Unknown Landmark")
+        print("\nLow confidence → Unknown Landmark")
     else:
-        print(f"\n✅ Final Prediction: {class_labels[np.argmax(pred)]} ({confidence*100:.2f}%)")
+        print(f"\nFinal Prediction: {class_labels[np.argmax(pred)]} ({confidence*100:.2f}%)")
 
     plt.imshow(img)
     plt.axis('off')
