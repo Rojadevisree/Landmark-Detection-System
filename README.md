@@ -31,6 +31,7 @@ This project uses transfer learning with MobileNetV2 to identify and classify la
 - icrawler
 
 ## Project Structure
+```plaintext
 Landmark-Detection-System/
 │
 ├── train_model.py
@@ -39,6 +40,7 @@ Landmark-Detection-System/
 ├── check_dataset.py
 ├── README.md
 └── .gitignore
+```
 
 ## Model Performance
 - Validation Accuracy: ~95%
